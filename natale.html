@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natalizio Script</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background-color: #1e1e1e;
+            color: #c5c5c5;
+            margin: 0;
+            padding: 0;
+        }
+        #output {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .line {
+            margin: 5px 0;
+        }
+        .typing {
+            display: inline;
+            white-space: pre;
+            overflow: hidden;
+            border-right: 2px solid #c5c5c5;
+            animation: blink 0.3s steps(1, start) infinite;
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="music" src="musica-natale-8bit.mp3" autoplay loop></audio>
+    <div id="output"></div>
+
+    <script>
+        const lines = [
+            "",
+            "Microsoft Windows [XMas Edition 10.0.19045.5131]",
+            "(c) Microsoft Corporation. Tutti i diritti sono riservati.",
+            " ",
+            "C:\\> Inizializzazione di Natale.exe",
+            " ",
+            "Fase 1: Preparazione renne in corso...",
+            "- Rudolph: ► OK",
+            "- Dasher: ► OK",
+            "- Prancer: ► OK",
+            "- Vixen: ► OK",
+            "Fase 1 completata ✅",
+            " ",
+            "Fase 2: Lucidatura slitta in corso...",
+            "- Rimozione neve residua: ► OK",
+            "- Cera glitterata applicata: ► OK",
+            "- Test volo in atmosfera: ► OK",
+            "Fase 2 completata ✅",
+            " ",
+            "Fase 3: Inbustamento regali in corso...",
+            "- Regalo 1 (Giocattolo): 🎁 pronto",
+            "- Regalo 2 (Libri): 📚 pronto",
+            "- Regalo 3 (Calzini natalizi): 🧦 pronto",
+            "Fase 3 completata ✅",
+            " ",
+            "Fase 4: Ecografia addome completo Babbo Natale in corso...",
+            "- Fegato ingrossato con evidenti depositi di cioccolatosi steatosica",
+            "- Milza regolare per dimensioni e struttura, con occasionali ombre compatibili con frammenti di torrone",
+            "- Colecisti ben distesa, contenente piccole formazioni altamente riflettenti verosimilmente compatibili con micro-calcoli di zucchero di canna",
+            "- Aorta addominale regolare, ma si nota una lieve turbolenza da risate profonde in corrispondenza di ripetuti Oh-oh-oh!",
+            "- Pancreas in discreta sofferenza metabolica, con segni di “diabete festivo subclinico” in via di compensazione. Si consiglia moderazione con le cioccolate calde di rito",
+            "Fase 4 completata ✅",
+            " ",
+            "Fase 5: Emocromo completo con formula a tutti gli Elfi in corso...",
+            "- Ferro: ► OK",
+            "- Vitamina D (da scarsa esposizione alla luce): ▒ Borderline",
+            "- Zuccheri residui (a causa di alta assunzione di cioccolato): ▓  Alto!",
+            "Fase 5 completata ✅",
+            " ",
+            "C:\\> Caricamento spirito natalizio: [###########] 100%",
+            "C:\\> Esecuzione script .\\auguri_di_natale.sh..",
+            " ",
+            "🎅 Auguri di Buon Natale e Felice Anno Nuovo! 🎁",
+            "✨ Che la Forza (e lo spirito festivo) sia con te! ✨",
+            " ",
+            "Fine esecuzione. Buone feste! 🎄",
+            "Diego"
+        ];
+
+        const outputDiv = document.getElementById("output");
+
+        async function typeText(text, delay = 50) {
+            const line = document.createElement("div");
+            line.className = "line";
+            const typingSpan = document.createElement("span");
+            typingSpan.className = "typing";
+            line.appendChild(typingSpan);
+            outputDiv.appendChild(line);
+
+            for (let i = 0; i < text.length; i++) {
+                typingSpan.textContent += text[i];
+                await new Promise(r => setTimeout(r, delay));
+            }
+            typingSpan.classList.remove("typing");
+
+            while (outputDiv.scrollHeight > outputDiv.clientHeight) {
+                outputDiv.removeChild(outputDiv.firstChild);
+            }
+        }
+
+        async function displayLines() {
+            for (const line of lines) {
+                await typeText(line);
+                await new Promise(r => setTimeout(r, 500));
+            }
+        }
+
+        displayLines();
+    </script>
+</body>
+</html>
